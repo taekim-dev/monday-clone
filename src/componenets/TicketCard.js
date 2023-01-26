@@ -8,8 +8,6 @@ import DeleteBlock from "./DeleteBlock"
 const TicketCard = ({color, ticket}) => {
 
 
-    console.log("color: " + color)
-
     return (
         <div className="ticket-card">
             <Link to={`/ticket/`} id="link">
