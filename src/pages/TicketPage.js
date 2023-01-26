@@ -81,8 +81,6 @@ const TicketPage = () => {
                                 checked={formData.priority === 1}
                             />
                             <label htmlFor="priority-1">1</label>
-                        </div>
-                        <div className="multiple-input-container">
                             <input
                                 id="priority-2"
                                 name="priority"
@@ -92,8 +90,6 @@ const TicketPage = () => {
                                 checked={formData.priority === 2}
                             />
                             <label htmlFor="priority-2">2</label>
-                        </div>
-                        <div className="multiple-input-container">
                             <input
                                 id="priority-1"
                                 name="priority"
@@ -103,8 +99,6 @@ const TicketPage = () => {
                                 checked={formData.priority === 3}
                             />
                             <label htmlFor="priority-3">3</label>
-                        </div>
-                        <div className="multiple-input-container">
                             <input
                                 id="priority-4"
                                 name="priority"
@@ -114,8 +108,6 @@ const TicketPage = () => {
                                 checked={formData.priority === 4}
                             />
                             <label htmlFor="priority-4">4</label>
-                        </div>
-                        <div className="multiple-input-container">
                             <input
                                 id="priority-5"
                                 name="priority"
