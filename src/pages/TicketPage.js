@@ -1,22 +1,36 @@
-import {useContext, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import CategoriesContext from '../context'
 
 
-const TicketPage = () => {
+const TicketPage = (editMode) => {
+
+    const {categories, setCategories} = useContext(CategoriesContext)
+
     const [formData, setFormData] = useState({
         status: 'not started',
         progress: 0,
+        //category: "",
         timestamp: new Date().toISOString()
     })
-    const {categories, setCategories} = useContext(CategoriesContext)
-
-    const editMode = false
 
     const navigate = useNavigate()
+    let { id } = useParams()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if(editMode){
+            const response = await axios.put(`http://localhost:8000/tickets/${id}`, {
+                data:formData
+            })
+            const success = response.status === 200
+            if(success){
+                navigate('/')
+            }
+        }
+
         if(!editMode){
             const response = await axios.post('http://localhost:8000/tickets', {
                 formData,
@@ -27,6 +41,18 @@ const TicketPage = () => {
             }
         }
     }
+
+    const fetchData = async () => {
+        //console.log(`http://localhost:8000/tickets/${id}`)
+        const response = await axios.get(`http://localhost:8000/tickets/${id}`)
+        setFormData(response.data.data)
+    }
+
+    useEffect(() =>{
+        if(editMode) {
+            fetchData()
+        }
+    },[])
 
     const handleChange = (e) => {
         const value = e.target.value
@@ -95,7 +121,7 @@ const TicketPage = () => {
                                 type="radio"
                                 onChange={handleChange}
                                 value={1}
-                                checked={formData.priority == 1 || categories[0] } //|| categories[0]
+                                checked={formData.priority == 1 }
                             />
                             <label htmlFor="priority-1">1</label>
                             <input
@@ -154,7 +180,7 @@ const TicketPage = () => {
                         <select
                             name="status"
                             value={formData.status}
-                            oneChange={handleChange}
+                            onChange={handleChange}
                         >
                             <option selected={formData.status === 'done'} value='done'>Done</option>
                             <option selected={formData.status === 'working on it'} value='working on it'>Working on it</option>
