@@ -1,6 +1,8 @@
-import {useState} from 'react'
+import {useContext, useState} from 'react'
 import axios from 'axios'
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
+import CategoriesContext from '../context'
+
 
 const TicketPage = () => {
     const [formData, setFormData] = useState({
@@ -8,15 +10,16 @@ const TicketPage = () => {
         progress: 0,
         timestamp: new Date().toISOString()
     })
+    const {categories, setCategories} = useContext(CategoriesContext)
+
     const editMode = false
 
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         if(!editMode){
             const response = await axios.post('http://localhost:8000/tickets', {
-                formData
+                formData,
             })
             const success = response.status === 200
             if(success){
@@ -36,8 +39,8 @@ const TicketPage = () => {
         )
     }
 
-    const categories = ['test1', 'test2']
     console.log(formData)
+    //console.log('EDITcategories', categories)
 
     return (
         <div className="ticket">
@@ -81,7 +84,6 @@ const TicketPage = () => {
                             name="category"
                             type="text"
                             onChange={handleChange}
-                            required={true}
                             value={formData.category}
                         />
 
@@ -93,7 +95,7 @@ const TicketPage = () => {
                                 type="radio"
                                 onChange={handleChange}
                                 value={1}
-                                checked={formData.priority == 1}
+                                checked={formData.priority == 1 || categories[0] } //|| categories[0]
                             />
                             <label htmlFor="priority-1">1</label>
                             <input
