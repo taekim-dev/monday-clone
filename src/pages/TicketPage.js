@@ -4,7 +4,9 @@ import {useNavigate, useParams} from 'react-router-dom'
 import CategoriesContext from '../context'
 
 
-const TicketPage = (editMode) => {
+const TicketPage = (props) => {
+
+    const {editMode} = props
 
     const {categories, setCategories} = useContext(CategoriesContext)
 
