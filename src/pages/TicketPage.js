@@ -67,9 +67,6 @@ const TicketPage = (props) => {
         )
     }
 
-    console.log(formData)
-    //console.log('EDITcategories', categories)
-
     return (
         <div className="ticket">
             <h1>{editMode ? 'Update your Ticket' : 'Create a Ticket'}</h1>
