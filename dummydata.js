@@ -3,7 +3,7 @@ const tickets = [
         category: 'Q1 2022',
         color: 'red',
         title: 'NFT Safety 101 Video',
-        owner: 'Ania Kubow',
+        owner: 'Tae',
         avatar: "https://www.freecodecamp.org/news/content/images/size/w150/2021/05/ania-kubow-gravatar.jpeg",
         status: 'done',
         priority: 5,
